@@ -18,20 +18,31 @@ class _State extends State<Intro> {
   Widget build(BuildContext context) {
     return Scaffold(
       
+      
+      
       body: SafeArea(
-              child: Center(
-          
-                child: Column(
+      
+        
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                
+              
             children: [
-              Hero(tag:'1',
-              child: Image(image:AssetImage('assets/feedback_pic.jpg'),
-              fit: BoxFit.fill,)),
+              Row(
+                              children: [Hero(tag:'1',
+                  child: Image(image:AssetImage('assets/feedback_pic.jpg'),
+                  width:300
+              
+              )),],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  
+              ),
+              SizedBox(height: 30),
               FloatingActionButton(onPressed:(){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-              },
-              child: Text('Start'),)
+                },
+                child: Text('Start'),)
             ],),
-        ),
       )
 
       
@@ -50,31 +61,44 @@ class _HomeState extends State<Home> {
   double count =0;
   double rating=1;
   int i =0;
-  List <String> list  = ['text1','text2','text3','text4','text5','text6'];
+  List <String> list  = ['How did you like our service','How did you appreciate the sanitation',
+  'How was the sound quality','How was the lighting','How likely are you to recommend us to a friend','How likely are you to come back here'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
       centerTitle: true,
-        title: Text(''),
+        title: Text('Feedback',),
       ),
       body: SafeArea(
+        
               child: Padding(
           padding: EdgeInsets.all(20),
           child: Center(
                       child: Column(
+                        
               children: [if(i!=6)...[
 
                 Hero(
                                 tag: '1',
                                 child: Image(
-                    image: AssetImage('assets/feedback_pic.jpg')
+                    image: AssetImage('assets/feedback_pic.jpg'),
+                    height: 200,
+                    width: 200,
                   ),
                 ),
+                SizedBox(height: 30),
                 
                 
-                Text(list[i]),
+                Text(list[i]
+                ,style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.blueGrey
+
+                ),),
+                SizedBox(height: 30),
                 Slider(value:rating, onChanged: (newRating)
                 {
                   setState(() {
@@ -87,6 +111,7 @@ class _HomeState extends State<Home> {
                 max:5,
                 divisions: 4,
                 label: "$rating",),
+                SizedBox(height: 30),
                 FloatingActionButton(
                   onPressed: (){
                     setState(() {
@@ -109,7 +134,8 @@ class _HomeState extends State<Home> {
                  Text('We are sorry for the inconvinience',
                  
                  style: TextStyle(
-                   color: Colors.red
+                   color: Colors.red,
+                   fontSize: 15,
                  ) ),
                  TextButton(onPressed:(){setState(() {
                    i=0;
@@ -120,7 +146,8 @@ class _HomeState extends State<Home> {
                else if(11<=count&&count<=20)...[
                  Text('Hope we serve you better next time',
                  style: TextStyle(
-                   color: Colors.yellow
+                   color: Colors.yellow,
+                   fontSize: 15,
                  ) ),
                  TextButton(onPressed:(){setState(() {
                    i=0;
@@ -131,8 +158,10 @@ class _HomeState extends State<Home> {
                else...[
                  Text('We hope you come back next time',
                  style: TextStyle(
+                   fontSize: 15,
                    color: Colors.green
                  ) ),
+                 SizedBox(height: 20),
                  TextButton(onPressed:(){setState(() {
                    i=0;
                    rating=1;
